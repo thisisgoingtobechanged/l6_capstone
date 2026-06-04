@@ -1,1 +1,4 @@
 pyreadr
+pandas
+matplotlib
+numpy

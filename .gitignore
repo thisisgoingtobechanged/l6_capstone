@@ -5,3 +5,4 @@ data/*/*.RDS
 *.md
 !README.md
 *.pdf
+*.tex

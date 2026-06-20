@@ -1,0 +1,54 @@
+>
+> To: george.bridgwater@animalask.org
+> Re: Capstone research outputs
+>
+> Dear George,
+>
+> I am writing to share both my academic study and my 'real-world' product from my capstone project. The product is a geographic influence map showing citation relationships between Denmark, Germany and Austria, together with a Python pipeline that I have programmed to be extensible if the underlying classifier from my pilot academic study is expanded. You can access it here, within the 'product' folder: https://github.com/thisisgoingtobechanged/l6_capstone. You are also most welcome to read the academic output and I believe these findings could be of use to Animal Ask 'as is'. The purpose of the product is facilitate extending the pilot academic study and, visualising it for your clients, as easy as possible, You can also re-use the data pipeline to ask questions of particular interest to the animal welfare charities, charity evaluators, and mission monitoring groups you work with.
+>
+> My academic study used the ParlLawSpeech V2 corpus, a dataset of parliamentary bills and enacted laws from seven countries and the EU. https://parllawspeech.org/data/. This data set also contains plenary speeches, but I did not analyse them as part of the scope of this project, although I think this could be a valuable next step.
+>
+> My study is a pilot project looking at three countries, but although it would be very labour intensive to scrape bills and laws outside of ParlLawSpeech, there are still plenty more countries that could be analysed within this corpus. I chose these three pilot countries because they appear to gold-plate their policy and implement changes from the EU prior to deadlines, whereas some of the other states in the dataset (e.g. Hungary) do not until until compelled to by the deadlines.
+>
+> I applied a combination of keyword filtering and LLM-based classification to identify and categorise foreign country citations. Three citation mechanism types were applied following a taxonomy derived from looking at leader-follower effects in the Dutch parliament.
+>
+> More specifically, within the product folder you should find the following:
+>
+>     output/influence_map_base.svg — a geographic network diagram, projected onto a Lambert Conformal map of Europe, showing the citation relationships between the three studied countries and some countries that our discussion and our research identified as particularly progressive. From our discussion my understanding is that it would useful to see if these leader countries are referenced in the three countries I selected to investigate. However it was also my understanding that this is not the only form of leader-follower effect that may be of relevance to Animal Ask and its clients. The analysis showed that, at least from the animal welfare legislation I managed to isolate from the wider corpus so far, that a particularly strong discursive leader-follower effect is found between Germany and Denmark, where Denmark is more proactive in its animal welfare policy. This is perhaps disappointing given that the study does not show that a smaller country like Denmark could have disproportionate leverage over a much larger exporter like Germany. It appears that the relationship is the other way around, where Denmark is particularly concerned with German policy. That said, even if Germany is not the ideal, easy-to-move candidate, this still builds evidence that interventions in Germany could have a multiplicative impact.
+>
+>     output/influence_map_base.pdf — a print-ready version of the same diagram
+>
+>     how_to_update.md — instructions for regenerating the map if and when a better classifier becomes available (see Limitations below).
+>
+>
+> Limitations — please read before sharing externally
+>
+> There are several limitations to this study. I will start with those that are most correctable and move on to those which are most systematic.
+>
+> I encourage you to further refine the keyword filtering system I set up. My research pointed out some pitfalls that I managed to avoid but unfortunately most of the documents that made it through the filter were still irrelevant. I do not know how many false positives there were either, i.e. how many relevant documents I excluded.
+>
+> The LLM used to classify citation contexts (Claude Haiku) was relatively imprecise in discriminating between mechanism types. I used a cheap model given my budget and it cost ~51p in credits per run. A more substantial source of improvement is to be found in prompt engineering.
+>
+> The map as delivered uses the current best-available classifications. The how_to_update.md guide explains how Animal Ask's team could supply improved classifications — either by re-running the pipeline with a more capable model, or by replacing the classification file with human-annotated labels — and regenerate the map automatically, without needing to change to the visualisation code.
+
+> Relevance to Animal Ask's clients
+>
+> I am sorry to labour the point here, but I want to make this very clear for the marker of my study, who will also read this email. As I understand Animal Ask's work, a recurring challenge for your clients seeking grants from evidence-based funders such as Coefficient Giving is demonstrating that their campaigns have a cascading or multiplicative effect rather than acting only in the jurisdiction where they are run. The evidence base for this kind of diffusion in farmed animal welfare has, until recently, been largely inferential.
+>
+> This study provides direct, text-level evidence that at least one such leader-follower effect is observable in the legislative record: Danish pig welfare standards appear in German parliamentary debate in a way consistent with learning and policy monitoring. For advocacy groups operating in or targeting Germany, this suggests that campaigns which have first succeeded in Denmark carry a plausible evidential basis for claiming downstream influence on German legislative discourse and, given Germany's own influence on Austria and the Netherlands, potentially further.
+>
+> Three client groups could draw on this in different ways:
+>
+>     Advocacy organisations could use the DK → DE citation evidence to document that the policy environment they are working in is one where diffusion has historically occurred.
+>
+>     MEL organisations such as The Mission Monitor could use the pipeline (once the classifier is improved) to assess whether specific campaigns have left a trace in parliamentary citation patterns across borders.
+>
+>     Philanthropic funders and charity evaluators. If a proposed campaign targets a country with a documented history of receiving and acting on legislative signals from a neighbour, that claim is more credible than if it targets an isolated system.
+>
+> The original product concept I proposed earlier in the year would have been a much more useful tool. I am sorry that I had to compromise so late in the day, and that I haven't been in touch recently. The influence map delivered here might at least be the bottom layer that would underpin such a tool: it establishes which country pairs are worth monitoring and what mechanism the diffusion tends to take ifyou would like to take this further.
+>
+> I welcome any feedback on whether the framing of the findings, or the visualisation itself, is useful for the conversations Animal Ask is having with its clients.
+>
+> Thank you for all of your help and support during this time, and again I apologise for the compromises I have had to make.
+>
+> Finn R

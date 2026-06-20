@@ -6,3 +6,6 @@ data/*/*.RDS
 !README.md
 *.pdf
 *.tex
+!M6001_AcademicOutput_22001041834.pdf
+!influence_map_base.pdf
+!how_to_update.md

@@ -2,3 +2,6 @@ pyreadr
 pandas
 matplotlib
 numpy
+anthropic
+scikit-learn
+seaborn

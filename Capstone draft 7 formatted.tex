@@ -1,0 +1,825 @@
+% ============================================================
+% Capstone Draft 7 — Formatted for submission
+% Compile with: pdflatex → pdflatex (run twice for page refs)
+% Or upload to Overleaf (overleaf.com) and click Compile.
+% ============================================================
+\documentclass[twocolumn, 10pt, a4paper]{article}
+
+% ── GEOMETRY ─────────────────────────────────────────────────────────────────
+\usepackage[
+  top=2.2cm, bottom=2.8cm,
+  left=1.6cm, right=1.6cm,
+  columnsep=0.75cm
+]{geometry}
+
+% ── FONTS AND TYPOGRAPHY ─────────────────────────────────────────────────────
+\usepackage{times}      % Times New Roman body text (matches PNAS)
+\usepackage{microtype}  % Improved justification / hyphenation
+
+% ── TABLES ───────────────────────────────────────────────────────────────────
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{tabularx}
+
+% ── LINKS AND CROSS-REFERENCES ───────────────────────────────────────────────
+\usepackage[
+  colorlinks=true,
+  linkcolor=black,
+  citecolor=black,
+  urlcolor=blue
+]{hyperref}
+\usepackage{lastpage}   % \pageref{LastPage}
+
+% ── HEADERS / FOOTERS ────────────────────────────────────────────────────────
+\usepackage{fancyhdr}
+
+% Fill in your GitHub URL here:
+\newcommand{\githublink}{\href{https://github.com/thisisgoingtobechanged/l6_capstone}{github.com/thisisgoingtobechanged/l6\_capstone}}
+\newcommand{\LIS}{London Interdisciplinary School}
+\newcommand{\thesubdate}{June 2026}
+\newcommand{\studentid}{22001041834}
+\newcommand{\pagerefs}{\thepage\ of \pageref{LastPage}}
+
+% -- Recurring pages (2 onwards) --
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0.4pt}
+\fancyfoot[L]{\footnotesize \githublink\ $|$ ID:~\studentid}
+\fancyfoot[R]{\footnotesize \LIS\ $|$ \thesubdate\ $|$ \pagerefs}
+
+% -- Page 1 special --
+% NOTE: \thispagestyle must be called AFTER \maketitle (which resets to 'plain').
+% It is applied immediately after \twocolumn[...] in the document body.
+\fancypagestyle{firstpagestyle}{
+  \fancyhf{}
+  \renewcommand{\headrulewidth}{0pt}
+  \renewcommand{\footrulewidth}{0.4pt}
+  \fancyfoot[L]{\footnotesize \githublink}
+  \fancyfoot[R]{\footnotesize \LIS\ $|$ \thesubdate\ $|$ \pagerefs}
+}
+
+% ── MATHS ────────────────────────────────────────────────────────────────────
+\usepackage{amsmath}
+\usepackage{amssymb}  % \blacktriangleleft for citation direction notation
+
+% ── MISC ─────────────────────────────────────────────────────────────────────
+\usepackage{parskip}    % Space between paragraphs instead of indent
+\setlength{\parskip}{4pt}
+\usepackage{enumitem}
+\setlist[itemize]{leftmargin=*, topsep=2pt, itemsep=1pt}
+
+% ── TITLE ────────────────────────────────────────────────────────────────────
+\title{\textbf{The World Leader Effect in Animal Welfare Policy:}\\
+  \large Categorising evidence of diffusion mechanisms in primary animal welfare
+  legislation in the Danish, Austrian and German parliaments, 2009--2019}
+\author{Student ID: \studentid \quad \LIS}
+\date{\thesubdate}
+
+% ============================================================
+\begin{document}
+% ============================================================
+
+% Title and preamble span both columns
+\twocolumn[{%
+\begin{@twocolumnfalse}
+
+\maketitle
+\vspace{-0.5em}
+\hrule
+\vspace{0.8em}
+
+% ── ABBREVIATIONS + COUNTRY CODES ────────────────────────────────────────────
+\begin{minipage}[t]{0.45\textwidth}
+\textbf{Abbreviations}\\[4pt]
+\begin{tabular}{ll}
+\toprule
+Acronym & Meaning \\
+\midrule
+FAW & Farmed Animal Welfare \\
+EU  & European Union \\
+\bottomrule
+\end{tabular}
+\end{minipage}%
+\hfill
+\begin{minipage}[t]{0.45\textwidth}
+\textbf{Country codes (ISO 3166)}\\[4pt]
+\begin{tabular}{ll}
+\toprule
+Code & Country \\
+\midrule
+DK & Denmark \\
+AT & Austria \\
+DE & Germany \\
+NL & Netherlands \\
+SE & Sweden \\
+CH & Switzerland \\
+UK & United Kingdom \\
+\bottomrule
+\end{tabular}
+\end{minipage}
+
+\vspace{0.6em}
+\noindent\small\textit{In this study, `A $\blacktriangleleft$ B' indicates country A is citing country B in its legislative process.}
+\vspace{0.6em}
+\hrule
+\vspace{0.8em}
+
+% ── ABSTRACT ─────────────────────────────────────────────────────────────────
+\noindent\textbf{Abstract} \quad
+This pilot study asks how three Northern European countries make reference to each
+other and world leaders in their primary legislation\footnote{Primary legislation is
+law created by the legislative branch of government. In parliamentary democracies,
+this will generally consist of parliaments passing statutes or acts that lay out
+general principles. From this, the executive branch then issues secondary
+legislation, which is more specific and legally enforceable.} relating to farmed
+animal welfare between 2009 and 2019. Using the ParlLawSpeech V2 parliamentary
+corpus (Schwalbach et al., 2025), 453 documents, consisting of bills and laws, were
+assembled from the legislature of Germany, Austria, and Denmark. A
+regular-expression citation extraction pipeline produced 355 foreign country
+reference contexts, of which 62 formed the analytical sample after AI-assisted
+classification using the taxonomy of De Ruiter and Schalk (2017). Germany emerges
+as a discursive leader among follower countries, receiving 22 within-trio analytical
+citations, 20 of which come from Denmark. Qualitative analysis reveals that
+citations are mostly informational across all country pairs. This indicates that the
+operative diffusion mechanism for farmed animal welfare in the EU is learning rather
+than emulation. This is despite Denmark adopting most welfare reforms at the same
+time as or before Germany. Discursive attention that indicates learning under
+De~Ruiter and Schalk's taxonomy may therefore also or instead be tracking competitive
+economic dependency. Future research should further this programme of improving the
+measures by which the diffusion mechanism of animal welfare policy can be unpicked as
+existing measures are still confounding.
+
+\vspace{1.2em}
+\end{@twocolumnfalse}
+}]
+\thispagestyle{firstpagestyle}  % override \maketitle's reset to 'plain'
+
+% ============================================================
+% TWO-COLUMN BODY STARTS HERE
+% ============================================================
+
+\section{Background}
+
+Over the last few decades, consumer concern regarding the implications of industrial
+animal agriculture has risen (Broom, 2017, p.~18; European Court of Auditors, 2018,
+p.~3). The EU moved quickly in the late 1990s and early 2000s to introduce minimum
+welfare standards (Broom, 2017, p.~24), and recognised animals as `sentient beings'
+in the 2009 Treaty of Lisbon (European Court of Auditors, 2018, p.~3; Broom, 2017,
+p.~26). Supranational EU legislation has since stalled. Dairy cows, farmed fish, and
+rabbits are unprotected by specific EU directives (Broom, 2017, p.~54). European
+Citizens' Initiatives for a `Fur Free Europe' and to `End the Cage Age' both
+succeeded in gaining the requisite signatures but the European Commission is yet to
+bring forward a legislative proposal on either (European Commission, 2021, 2023).
+
+Even the least progressive EU states remain comparatively advanced in the global
+context because of the EU setting a floor for animal welfare standards. However, EU
+minimums now often lag behind the progressive legislation of some of its member
+states and there is considerable variation between leader countries and laggards even
+within the EU (Vogeler, 2017). Five out of the six highest rated countries worldwide
+(ranked according to the World Animal Protection Index (API), each graded with a `B'
+overall) are current or former EU member states (World Animal Protection, 2020).
+These are Austria, Denmark, Sweden, the Netherlands and the UK. The sixth, not an EU
+member, is Switzerland. It is the only country to have received the highest `A' grade
+from the API, in 2014\footnote{Switzerland was demoted to a `B' grade in 2020, the
+same rank as this study's other World Leaders in animal welfare.} (World Animal
+Protection, 2020). These six countries are this study's World Leaders.
+
+\section{Literature Review}
+
+Policy diffusion is `the process whereby policy choices in one unit are influenced
+by policy choices in other units' (Maggetti \& Gilardi, 2016, p.~87). There is
+consensus in the literature that diffusion is a product of interdependence. However,
+this interdependence can take different forms (Maggetti \& Gilardi, 2016, p.~87).
+The literature refers to these forms as `mechanisms', which in over a thousand
+articles (Shipan \& Volden, 2012, p.~1) have been grouped into four broad
+categories: learning, emulation, competition and coercion (Shipan \& Volden, 2008,
+p.~840), which for clarity are referred collectively to in this study as the LECC
+model.
+
+Learning is defined as where `the policies in one unit are influenced by the
+consequences of similar policies in other units' (Maggetti \& Gilardi, 2016,
+p.~4). Emulation by contrast is not related to the objective consequences of a
+policy and instead its symbolic and socially-constructed characteristics are crucial
+(Maggetti \& Gilardi, 2016, p.~5). Competition is the reaction between units in an
+attempt to attract and retain resources (Maggetti \& Gilardi, 2016, p.~5). An
+imagined example of each might be: `Swedish policy has proven effective in reducing
+sow mortality' (learning) versus `we should be more like Sweden' (emulation) versus
+`we need to mimic Sweden before Swedish producers undercut us' (competition). Although
+coercion is not a mechanism this study examines, it is defined as when threats are
+made to subordinate units if they do not comply with policy changes suggested by
+the senior unit, e.g.\ `The EU will fine us if we do not adopt animal welfare
+standards'.
+
+Graham, Shipan and Volden (2013) conducted a systematic review documenting how
+diffusion research has itself `diffused' across the social sciences by means of the
+shared conceptual vocabulary of these four mechanisms. Mallinson (2021) extended this
+in a meta-review of policy diffusion studies in American states, estimating effect
+sizes of the most commonly used diffusion variables and identifying biases in
+published research. The cumulative picture is that diffusion effects are real and
+robust, but their magnitude and operative mechanisms vary substantially across policy
+types and political contexts. Maggetti and Gilardi (2016) provide a meta-analysis of
+114 studies demonstrating that the same indicators are used to measure different
+diffusion mechanisms and different indicators are used to measure the same diffusion
+mechanism (Maggetti \& Gilardi, 2016, p.~18).
+
+There are multiple criticisms of the LECC model in the literature which have resulted
+in alternative proposals to redress its perceived shortcomings. The first, the
+underspecification of these four terms, has led to the development of new definitions
+to be applied in a more strictly deductive fashion. Blatter et al.\ (2021) address
+bias, and reformulate the mechanisms into interest-driven, rights-driven,
+ideology-driven, and recognition-driven pathways. Gilardi and Wasserfallen (2019) are
+concerned by a failure of omission by the model. They argue that the LECC model
+underspecifies the political dimensions of the process, and treats the selective
+borrowing of foreign policy as a well-calculated choice by legislators trying to
+garner legitimacy for their proposals. Genovese et al.\ (2016) corroborate this and
+show that such an assumption would be a systematic error. Governments are rarely
+presented with a single diffusing policy in isolation. There are frequently
+alternative policies to consider, but a country must also consider their dependency on
+foreign resources and will choose a substitute policy by evaluating the more limited
+options available under these constraints.
+
+Linos argues instead that diffusion and domestic democracy are mutually reinforcing
+(Linos, 2013, p.~2). Politicians emulate the policy choices of familiar, wealthy and
+culturally proximate countries to signal to `uninformed' voters that their proposals
+are mainstream, competently designed and vetted (Linos, 2013, p.~3).
+
+Despite these legitimate criticisms and modifications of the most widespread
+definition framework (LECC), this study chooses to persist with using the LECC
+definitions because in so doing `we open our work up to more natural comparisons to
+similar studies elsewhere' (Graham et al., 2013, p.~700). Placing this capstone in a
+lineage of studies that share these familiar terms offers advantages. It can build on
+existing insights as well as enabling more straightforward verification and
+reproduction of results. To mitigate the pitfalls of the LECC framework, this study
+requires explicit and systematic reflection between how concepts are being
+conceptualised and how they will be operationalised. This will be laid out in the
+methodology. The challenge of the LECC framework is in how to consistently test its
+mechanisms in different contexts. The background definitions of these concepts, before
+they are systematised, are uncontentious.
+
+Policy diffusion operates across multiple governance levels. Countries can diffuse
+policies between one another in a peer-to-peer horizontal process (De Ruiter \&
+Schalk, 2017, p.~2). Particularly pertinent in the European Union context is vertical
+influence. `Bottom-up' diffusion occurs when individual member states influence the EU
+parliamentary process. `Top-down' diffusion involves EU mandates reshaping member
+states' behaviour (Shipan \& Volden, 2006, p.~825). It is in top-down instances that
+coercion is most commonly observed. Now that EU-level farmed animal welfare
+legislation has stalled, the operative diffusion mechanism has therefore shifted from
+top-down to peer-to-peer.
+
+Policy diffusion literature leverages the methods of analysis of many different social
+science disciplines. All the mechanisms described above have social, political and
+economic dimensions to them. The significant influence of these contextual factors
+makes it difficult to develop accurate, predictable theories of policy diffusion at
+scale. It is therefore essential to stratify the analysis as much as possible by
+limiting the research parameters to well-established geographic or federal blocs e.g.\
+The USA or the EU. The focus is less on the specific policy or category under
+investigation and more about developing a better theory of the \textit{mechanics} of
+policy diffusion between similar countries or states. Interestingly, although this
+recognition is well-aligned to the axioms of complexity science and its pursuit of
+meta-parsimonious explanations, the author did not find any literature on policy
+diffusion or animal welfare policy conducted through that prism.
+
+The terms `leader' and `follower' are widely used in policy diffusion literature. In
+different instances, a policy leader is defined as: the first mover in an adoption
+sequence; the most cited or emulated country in the debates of adopting states
+(discursive leadership); the state whose legislative turn of phrase is most
+extensively reused; or the state exerting the greatest causal influence on the
+probability of adoption elsewhere. This study focuses on the second definition of a
+policy `leader' as the country most frequently cited when legislators in other
+jurisdictions debate animal welfare legislation\footnote{This is for reasons expanded
+on in the methodology, but briefly because it can be measured directly from
+parliamentary records using the citation analysis methods described in the
+methodology section.}.
+
+Members of Parliament operate in an environment of `attention scarcity' (Jones \&
+Baumgartner, 2005, as cited in De Ruiter \& Schalk, 2017, p.~1), meaning they must
+find ways to lower `information collection costs', in other words reduce complexity
+when identifying the most critical issues to address (De Ruiter \& Schalk, 2017,
+p.~1). One key strategy is referencing the policy practices of other countries during
+plenary debates. De Ruiter and Schalk (2017, p.~4) demonstrate that MPs use new
+information about the policy practice in another country in parliamentary debate as
+it becomes available and citations could be a lever of legitimation. Linos (2013,
+p.~3) provides a theoretical basis for this, hypothesising that this is to signal a
+proposal is mainstream and internationally vetted, and therefore normatively
+acceptable to peers (and voters). There are other sources of policy that could be
+used as exemplars (e.g.\ think-tanks) but they are perhaps perceived as less
+rhetorically effective in debate.
+
+De Ruiter and Schalk (2017) inductively develop a taxonomy of foreign country
+references in Dutch plenary speeches that distinguishes between informational
+citations (where a foreign policy is described to inform deliberation) and
+legitimating citations (where the foreign case is invoked to validate a domestic
+proposal). A third type, cautionary citations, cite a foreign case as a warning or
+negative example. Note that citation frequency analysis captures salience in the
+debate, not necessarily cause and effect. A country can be cited frequently as a
+cautionary tale. It can be cited because it is culturally proximate and well-known
+rather than because its specific policy design has been substantively vetted and
+appropriated (i.e.\ whether the policy is diffusing via emulation or learning).
+
+Policy diffusion does not solely occur at the final stage of policy adoption. A
+significant but often neglected aspect of the diffusion process is the issue-definition
+stage (Gilardi et al., 2021, p.~21). Before policies are adopted or placed on an
+agenda, issues must be identified and defined through specific policy frames (Gilardi
+et al., 2021, p.~22). Studying diffusion solely through the lens of successful
+adoptions leads to a `pro-innovation bias'. Policies pass through various framing
+stages and adoptions themselves are rare (Gilardi et al., 2021, pp.~22--23). This
+study, therefore, includes proposed bills that did not pass alongside enacted laws.
+
+This research focuses specifically on laws and bills concerning farmed animal welfare
+in Denmark, Germany, and Austria between 2009 and 2019. This ten-year period is the
+overlap between the available data from ParlLawSpeech for these three countries.
+
+\noindent From this literature review the following sub-questions have emerged:
+
+\begin{enumerate}[leftmargin=*, topsep=2pt, itemsep=1pt]
+  \item Which foreign countries appear most frequently in the animal welfare
+        legislation of each citing country, and does this pattern differ across the
+        trio?
+  \item Do those citations function primarily as evidence-gathering (informational),
+        social proof (legitimating), or competitive awareness (cautionary)?
+  \item Does the direction of discursive attention align with the sequence in which
+        farmed animal welfare legislation was adopted?
+\end{enumerate}
+
+\section{Methodology}
+
+This study uses a convergent parallel mixed-methods design (Creswell \& Plano Clark,
+2011), in which a quantitative strand (citation frequency) and a qualitative strand
+(citation classification) are run in parallel and integrated in a final synthesis
+table.
+
+ParlLawSpeech is a multilingual parliamentary corpus covering legislative documents
+from multiple European countries (Rauh et al., 2023). For this study, the relevant
+components are the bills and enacted laws from Germany, Austria, and Denmark. The
+corpus provides documents in their original languages along with metadata including
+adoption date, initiation date and an identifier for each legislative item. This last
+links all documents belonging to the same legislative process. It can be used to
+recover laws whose keyword coverage in the enacted text is lower than in the
+originating bill.
+
+Foreign country citations were extracted using regular expression matching on the
+full text of each document in the corpus. Country terms were defined in a
+\texttt{COUNTRY\_NAMES} dictionary covering each target country's name in German,
+Danish, and English, with word-boundary anchors (\texttt{\textbackslash b}) to
+prevent false matches. This prevents compound words such as
+\textit{deutschnationale}, [German nationalist] from registering as a Germany
+reference. The target countries were Germany, Austria, Denmark, Sweden, Switzerland,
+the Netherlands, and the United Kingdom. Sweden and Switzerland were included as
+reference countries known from the adoption sequencing literature (Wallenbeck et al.,
+2024) to be relevant to the regional welfare diffusion context.
+
+For each regex match, a context window of $\pm600$ characters around the match was
+extracted to enable subsequent classification. Each match generated one row in the
+citation dataset: one document can contribute multiple rows if the target country is
+mentioned more than once.
+
+Each of the 355 extracted citation contexts was classified using the Claude Haiku 4.5
+language model via the Anthropic API. The classification scheme was based on De~Ruiter
+and Schalk's (2017) taxonomy for plenary speeches, in this case deployed on bills and
+laws and extended to include three exclusion categories.
+
+\noindent\textbf{Analytical categories (can co-occur).}
+\begin{itemize}
+  \item \textit{Informational:} the foreign case is cited to provide factual
+        information about a policy elsewhere; function is to inform deliberation.
+  \item \textit{Legitimating:} the foreign case is cited to validate or authorise a
+        domestic proposal; function is to signal the proposal is mainstream and
+        peer-vetted.
+  \item \textit{Cautionary:} the foreign case is cited as a warning or negative
+        example.
+\end{itemize}
+
+\noindent\textbf{Exclusion categories (mutually exclusive).}
+\begin{itemize}
+  \item \textit{False positive:} the country name appears but not as a reference to
+        that country as a political actor or policy exemplar (e.g.\ language
+        references such as \textit{deutsche \"Ubersetzung}, proper nouns, geographic
+        descriptions).
+  \item \textit{Out of scope:} the country is cited as a policy actor, but the
+        document concerns non-farmed animal welfare (companion animals, zoo animals,
+        wildlife).
+  \item \textit{EU implementation:} the document is transposing or ratifying EU
+        legislation; the country is mentioned as a co-signatory, not as a voluntary
+        peer whose policy is being studied.
+\end{itemize}
+
+Before examining the AI output, the author independently classified 15 randomly
+sampled contexts and recorded labels. The sample was locked.
+
+\section{Results}
+
+The filtering pipeline retained 453 documents in total: 204 laws and 249 bills.
+Denmark contributes the largest share of both categories (laws: 56\%, bills: 51\%).
+This reflects the larger size of the Danish component of ParlLawSpeech for this
+period. Germany and Austria each contribute roughly equally to the remainder.
+
+Regular expression extraction produced 355 foreign country citation contexts across
+the 453 documents. Denmark generated the largest share of raw citations (213, 60\%),
+followed by Austria (91, 26\%) and Germany (51, 14\%). This asymmetry partly reflects
+Denmark's larger corpus share and the denser text of Danish bills. Denmark produces
+roughly twice as many foreign country mentions per document as Germany (0.89 versus
+0.43 citations per document). Austria's per-document rate (0.96) is slightly higher,
+though Austria's smaller corpus means its absolute count remains far behind Denmark's.
+
+The most-cited country by raw frequency is Switzerland (94 citations), followed by
+Germany (93) and Sweden (66). Austria receives 22 raw citations; Denmark receives 10;
+the Netherlands 33; the UK 37.
+
+Switzerland's high raw count reflects EU implementation documents. Switzerland is
+frequently named as a co-signatory or comparative case in EU documents. This is
+consistent with Switzerland's institutional position vis-\`{a}-vis the EU. Since
+1995, Switzerland has pursued a policy of autonomous regulatory alignment with EU
+veterinary and food safety law, formalised from 2002 in the bilateral agreement on
+trade in agricultural products and extended in 2009 to a Common Veterinary Area
+covering animal health and welfare standards.
+
+Of the 355 citation contexts, 293 (82.5\%) were excluded:
+\begin{itemize}
+  \item \textit{EU implementation:} 87 (24.5\%)
+  \item \textit{False positive:} 102 (28.7\%)
+  \item \textit{Out of scope:} 104 (29.3\%)
+\end{itemize}
+
+The remaining 62 contexts (17.5\%) formed the analytical sample. The high exclusion
+rate is expected. Country names appear frequently in legislative documents for
+incidental reasons, such as a part of EU regulatory language or in legislation about
+zoo or companion animal welfare.
+
+The distribution of labels across the 62 analytical citations is:
+\begin{itemize}
+  \item \textit{Informational:} 58
+  \item \textit{Cautionary:} 6
+  \item \textit{Legitimating:} 2
+\end{itemize}
+
+Analytical categories can co-occur (and do, in this case). Therefore there are more
+than 62 citations.
+
+Across all analytical citations in the corpus, the dominant function of foreign
+country references is informational. Using De Ruiter and Schalk's (2017) framework
+it appears that citations of other countries are primarily to describe what those
+countries have already done.
+
+\begin{table}[h]
+\centering
+\footnotesize
+\caption{Citation mechanisms by country pair}
+\label{tab:mechanisms}
+\begin{tabular}{lrrrrl}
+\toprule
+Citing $\blacktriangleleft$ Cited & N & Inf.\% & Leg.\% & Caut.\% & Mechanism \\
+\midrule
+DK $\blacktriangleleft$ DE & 20 & 90 & 0 & 20 & Learning \\
+DE $\blacktriangleleft$ DK & 3  & 100 & 0 & 0 & Learning \\
+AT $\blacktriangleleft$ DE & 2  & 100 & 50 & 0 & Learning + Emulation \\
+DE $\blacktriangleleft$ AT & 2  & 50 & 50 & 50 & Learning + Emulation \\
+AT $\blacktriangleleft$ DK & 1  & 100 & 0 & 0 & Learning \\
+DK $\blacktriangleleft$ AT & 0  & --- & --- & --- & --- \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Germany receives 22 analytical citations, 20 from Denmark and 2 from Austria.
+Denmark receives 4, 3 from Germany and 1 from Austria. Austria receives 2, both from
+Germany.
+
+Denmark continues to cite higher than Austria and Germany when extended to World
+Leaders. The full integration table records DK $\blacktriangleleft$ SE (11 analytical citations) as
+the second-strongest citation relationship in the dataset. Denmark's outward
+orientation is not exclusively directed at Germany. Sweden's prominence in Danish
+legislative discourse is consistent with its role as the earliest adopter of pig
+welfare reforms in the region.
+
+Across all analytical citations ($N = 62$), Denmark accounts for 40 of them (65\%).
+Germany 14, and Austria 8. Denmark is the most prolific citing country and the
+recipient of the fewest within-trio citations. Germany is the least prolific citing
+country and the most-cited.
+
+The raw Cohen's Kappa, comparing the author's labels to the AI's classifications,
+was $\kappa = 0.281$. This suggests fair agreement on the Landis and Koch (1977)
+scale.
+
+This figure is misleading in a specific and important way. Eleven of the fifteen
+validation cases concerned the boundary between \textit{false positive} and
+\textit{out of scope}. These categories both lead to exclusion from the retained
+sample. The author classified several cases as \textit{out of scope} that the AI
+classified as \textit{false positive}, or vice versa. This boundary is admittedly
+ambiguous. This is because a document about zoo animal welfare that mentions Germany
+could be argued either way, depending on whether the country is read as a genuine
+policy exemplar or merely an incidental mention.
+
+When the three exclusion categories are collapsed into a single `excluded' label,
+agreement on the analytically consequential include-versus-exclude decision rises to
+14 out of 15 cases (93.3\%). The Cohen's Kappa on this binary include/exclude
+decision is $\kappa = 0.762$\footnote{%
+$0.762 = (0.933 - P_e) / (1 - P_e) \therefore P_e \approx 0.719$}. The author
+classified one case as \textit{unclear} (which would have included it in the
+analytical sample) while the AI classified it as \textit{false positive}, which
+excluded it.
+
+The two cases that both author and AI agreed should be included in the analytical
+sample were independently assigned the `informational' label. One case where the
+author assigned `cautionary' in addition to informational was classified by the AI
+as informational only.
+
+These results were checked against temporal adoption sequencing data from Wallenbeck
+et al.\ (2024), who documented the year in which each country adopted specific pig
+welfare measures relative to Sweden. For the study period, the relevant in-corpus
+measures are gestation housing (Austria in 2012, Germany in Denmark in 2013). This
+was the only welfare adoption event occurring for all three study countries within
+the 2009--2019 window at a point captured by the corpus.
+
+\subsection{Diffusion Mechanisms}
+
+The dominant mechanism across the corpus is learning according to the deductive
+framework. 93.5\% of analytical citations are informational, whereas legitimating
+citations make up 3.2\% (2/62). The most extensively cited relationship (Denmark to
+Germany, $N = 20$) is 90\% informational, 0\% legitimating, and 10\% cautionary.
+
+All six cautionary classifications identified overall appear in three specific
+citation relationships: DK $\blacktriangleleft$ DE, DE $\blacktriangleleft$ AT, and DE $\blacktriangleleft$ NL. The DK $\blacktriangleleft$ DE
+cautionary cases concern disease outbreak risk. Danish legislation cites Germany's
+2011--2012 dioxin crisis and historical swine fever outbreaks as exemplars of what
+can happen when food safety oversight fails. The DE $\blacktriangleleft$ AT and DE $\blacktriangleleft$ NL
+cautionary cases concern fur farming. A 2017 German bill cites Austria, the
+Netherlands and others as countries that have already banned mink farming, positioning
+Germany as a laggard relative to its European peers.
+
+Switzerland generates the highest number of raw citations across the corpus (94) but
+only 6 analytical citations after exclusion. Germany also cites Switzerland ($N = 3$)
+and the Netherlands ($N = 3$) in its analytical sample, primarily in the fur farming
+context. A 2017 German bill on mink welfare (mentioned in Vignette~3, below)
+compares German minimum space requirements unfavourably with Swiss, Austrian, and
+Dutch provisions. This document is responsible for the entirety of the DE $\blacktriangleleft$ AT
+and DE $\blacktriangleleft$ NL cautionary classifications.
+
+\subsection{Illustrative Vignettes}
+
+\noindent\textbf{Vignette 1: Cautionary, DK $\blacktriangleleft$ DE (2012, disease control)}
+
+A 2012 Danish bill on veterinary food safety controls invokes Germany's dioxin
+contamination crisis to argue for more robust domestic oversight. The context reads:
+\textit{`det danske kontrolsystem hidtil vist sig s\aa{} effektivt, at vi har
+und\aa{}et kemiske forureninger'}. The Danish control system has so far proven so
+effective that Denmark has avoided the chemical contamination incidents [of the kind
+seen in Germany]. Germany is cited as a warning. Denmark defines its own system's
+quality by contrast with Germany's failure. This is a competitive-awareness citation
+with a strong cautionary function. The AI classification (confidence: high)
+characterises this as a case where Germany's experience is invoked `to warn against
+potential economic consequences Denmark might face if similar contamination occurs,
+establishing a cautionary comparative reference.'
+
+\noindent\textbf{Vignette 2: Informational, DK $\blacktriangleleft$ DE (2018, veterinary medicine)}
+
+A 2018 Danish veterinary medicine bill surveys how comparable EU countries handle
+the dispensing of measured quantities of veterinary drugs. The relevant passage names
+\textit{`Belgien, Finland, Tyskland og Holland'}, Belgium, Finland, Germany, and the
+Netherlands, as countries where such dispensing schemes exist in some form. It also
+notes that in all these countries (as in Denmark) vets can already administer precise
+doses during treatment. Germany appears here as one data point in a comparative
+audit, cited descriptively and without evaluative language. The AI classification
+(confidence: high) characterises this as `providing factual information about how
+other member states handle medication portioning without invoking Germany as a model
+for legitimation or warning.'
+
+\noindent\textbf{Vignette 3: Cautionary, DE $\blacktriangleleft$ AT (2017, fur farming)}
+
+A 2017 German bill on fur animal welfare cites Austria, the Netherlands, the United
+Kingdom, and several other European countries as jurisdictions that have already
+enacted fur farming bans. The context notes that these countries have moved ahead on
+animal protection standards. Germany however, despite recommendations to the contrary
+from mammalogy experts, still requires only one square metre of space per mink.
+Austrian and Swiss requirements are many times larger. Austria is cited as evidence
+that Germany is falling behind. The cautionary function is self-directed. The AI
+classification (confidence: high) reads this as functioning `both to inform about
+existing policy elsewhere and to warn that Germany is lagging behind peer nations in
+animal protection standards.'
+
+\section{Discussion}
+
+The results are consistent with Mallinson's (2020) finding that ideological learning
+becomes more prominent in later stages of `the [policy] life course', displacing the
+regional proximity effects dominant in early stages.
+
+Germany receives the most within-trio citations in farmed animal welfare legislation,
+driven overwhelmingly by Denmark. On the standard operational definition used in this
+study, Germany is the discursive leader.
+
+However, Germany does consistently not lead Denmark in welfare adoption. Denmark
+adopted tail docking and manipulable material restrictions earlier than Germany and
+reached gestation housing reform at the same time. There is no empirical basis for
+treating Denmark as a discursive follower of a policy pioneer, yet Denmark cites
+Germany more than Germany cites Denmark, and more than either Austria or Germany cite
+each other.
+
+One plausible explanation is competitive monitoring. Germany is Denmark's largest
+neighbour, a major pork-producing economy, and a competitor in European export
+markets (Denver et al., 2021). Danish legislators have incentives to track German
+welfare legislation to know when Germany will be subject to the same costs that
+Danish producers already bear. If Danish pigs are raised under stricter welfare
+conditions than German pigs, Danish pork is more expensive to produce (Vogeler,
+2017). The moment Germany adopts equivalent standards, that cost disadvantage may
+narrow. Denmark's parliament has an interest in knowing when Germany will reach that
+point.
+
+This pattern is consistent with recent comparative work on regulatory competition in
+farm animal welfare elsewhere. Z\"{o}llmer (2025), examining the diffusion of welfare
+standards across US states, argues against the assumption that competitive exposure
+straightforwardly suppresses unilateral welfare improvement. The governance mode
+through which a standard is implemented determines whether competitive pressure
+produces resistance or accommodation (\textit{cf.}~Vogel's (1995) account of `races
+to the top' in environmental regulation).
+
+Legitimating citations across the corpus are extremely rare, while De Ruiter and
+Schalk (2017) found sufficient legitimating citations to inductively invent a
+category for them in the Dutch parliamentary context. The author offers several
+possible explanations. The sample is made up by bills and laws, not speeches.
+Legitimating rhetoric may be more characteristic of oral parliamentary debate than of
+written legislative texts, where the primary function is regulatory specification. A
+study of parliamentary speeches may reveal more legitimating citation. Another is
+that the countries in this study are still relatively high-welfare both in the
+European and global contexts. Legitimating citations may be more characteristic of
+laggard countries catching up. A study that included lower-welfare EU member states
+as citing countries would enable a direct test of this life-course interpretation.
+
+\subsection{Limitations}
+
+Several limitations should be noted. First, the corpus excludes parliamentary
+speeches for the primary analysis, meaning that the full discursive record is not
+examined. Second, the Kappa of 0.281 reflects genuine disagreement between the
+author and the AI on exclusion subcategory boundaries, even if the include/exclude
+agreement was 93.3\%. The AI may have overclassified or underclassified some
+analytical cases in ways that affected the mechanism distribution. Third, the small
+$N$ in some country pairs (AT $\blacktriangleleft$ DK: 1, AT $\blacktriangleleft$ DE: 2, DE $\blacktriangleleft$ AT: 2) means
+that mechanism classifications for those pairs are indicative rather than robust.
+Fourth, some DK $\blacktriangleleft$ SE citations in the analytical sample appeared on closer
+inspection to concern non-welfare topics (aviation regulation, excise duties) present
+in multi-topic bills that passed the keyword filter; this suggests the broad-tier
+keyword filter includes some documents with only marginal welfare relevance, and that
+the out-of-scope classifier did not catch all instances.
+
+Fifth, the study's chosen taxonomy was developed inductively by De Ruiter and Schalk
+(2017) from Dutch parliamentary debate on education and environmental policy. The
+categories of informational, legitimating, and cautionary citation may carry
+different rhetorical weight in German, Danish and Austrian legislative systems, and
+in the specific domain of farm animal welfare. The near-absence of legitimating
+citation in this corpus could also reflect a difference between nations in how
+foreign references function. This study cannot disentangle this. A validation of the
+taxonomy against a corpus from a country or policy domain where De Ruiter and
+Schalk's original categories were directly observed would help establish how portable
+the taxonomy is.
+
+Future research should extend the analysis to parliamentary speeches, which would
+provide a larger and more rhetoric-rich corpus. Including lower-welfare EU member
+states as citing countries would enable comparison of legitimating citation rates
+across welfare levels. It would provide a more direct test of the life-course
+interpretation offered in the discussion. A systematic review of the legislative
+language borrowed across jurisdictions would complement the citation frequency
+approach used here and triangulate a clearer measure of policy transfer.
+
+\section{Conclusion}
+
+Using the ParlLawSpeech corpus, 453 legislative documents were assembled and 355
+foreign country citation contexts were extracted and classified using an AI-assisted
+taxonomy derived from De Ruiter and Schalk (2017). Germany emerges as the discursive
+leader, receiving 22 within-trio analytical citations compared to 4 for Denmark and
+2 for Austria. The mechanism appears to be predominantly learning, as informational
+citation accounts for 93.5\% of analytical cases, with legitimating citations very
+rare. The cautionary cases concern two distinct phenomena: disease outbreak risk
+(DK $\blacktriangleleft$ DE) and laggard positioning relative to peers in fur farming welfare
+standards (DE $\blacktriangleleft$ AT, DE $\blacktriangleleft$ NL).
+
+However, the study demonstrates an asymmetry between adoption sequencing and what
+discursive attention would indicate under De Ruiter and Schalk's taxonomy. Denmark
+adopted several welfare measures at the same time as or before Germany, yet Denmark
+monitors Germany's legislative debates far more intensively than Germany monitors
+Denmark's. This suggests that discursive leadership, as measured by citation
+frequency, may reflect competitive economic dependency, and not learning. Germany may
+function as Denmark's discursive reference point due to this economic dependency
+rather than because German welfare policy is more advanced.
+
+Countries cite each other for different reasons at different stages of the diffusion
+lifecycle. A country that cites frequently may be learning, emulating, or watching a
+competitor. Disambiguating these mechanisms is essential for connecting the
+legislative process to how policy diffusion occurs.
+
+\vspace{0.5em}
+\noindent\small\textit{This work is 5{,}905 words in length from the title to the end of the reference list.}
+
+\vspace{0.3em}
+\noindent\small\textit{Verification data, code, supplementary information, and the Capstone product are available at \githublink.}
+
+% ============================================================
+% REFERENCES
+% ============================================================
+\section*{References}
+\begingroup
+\setlength{\parskip}{3pt}
+\footnotesize
+
+\noindent Blatter, J., Schmid, S., \& Bl\"attler, A.~C. (2021). Conceptualising and
+measuring political diffusion: A new approach. \textit{Political Studies Review},
+\textit{19}(1), 79--95.
+
+\noindent Broom, D.~M. (2017). \textit{Animal welfare in the European Union}.
+European Parliament Policy Department for Citizens' Rights and Constitutional
+Affairs.
+
+\noindent Creswell, J.~W., \& Plano Clark, V.~L. (2011). \textit{Designing and
+conducting mixed methods research} (2nd ed.). SAGE.
+
+\noindent De Ruiter, R., \& Schalk, J. (2017). Cross-national citation in European
+national parliaments: A case study of foreign references in Dutch parliamentary
+debate. \textit{Acta Politica}, \textit{52}(1), 1--23.
+
+\noindent Denver, S., Christensen, T., Nordstr\"{o}m, J., Lund, T.~B., \&
+Sand\o{}e, P. (2021). Is there a potential international market for Danish welfare
+pork? A consumer survey from Denmark, Sweden, and Germany. \textit{Meat Science},
+\textit{182}, 108633.
+
+\noindent European Commission. (2021). \textit{Questions and answers: Commission's
+response to the European Citizens' Initiative on ``End the Cage Age''} [Press
+release]. European Commission Press Corner.
+
+\noindent European Commission. (2023). \textit{Commission reply to the `Fur Free
+Europe' European Citizens' Initiative} [Communication]. European Citizens'
+Initiative Portal.
+
+\noindent European Court of Auditors. (2018). \textit{Animal welfare in the EU:
+Closing the gap between ambitious goals and practical implementation} (Special Report
+31/2018). Publications Office of the European Union.
+
+\noindent Genovese, F., Schneider, G., \& Wasserfallen, F. (2016). The politics of
+EU differentiated integration. \textit{British Journal of Political Science},
+\textit{46}(1), 1--22.
+
+\noindent Gilardi, F., Shipan, C.~R., \& W\"{u}est, B. (2021). Policy diffusion:
+The issue-definition stage. \textit{American Journal of Political Science},
+\textit{65}(1), 21--35.
+
+\noindent Gilardi, F., \& Wasserfallen, F. (2019). The politics of policy diffusion.
+\textit{European Journal of Political Research}, \textit{58}(4), 1245--1256.
+
+\noindent Graham, E.~R., Shipan, C.~R., \& Volden, C. (2013). The diffusion of
+policy diffusion research in political science. \textit{British Journal of Political
+Science}, \textit{43}(3), 673--701.
+
+\noindent Landis, J.~R., \& Koch, G.~G. (1977). The measurement of observer
+agreement for categorical data. \textit{Biometrics}, \textit{33}(1), 159--174.
+
+\noindent Linos, K. (2013). \textit{The democratic foundations of policy diffusion:
+How health, family, and employment laws spread across countries}. Oxford University
+Press.
+
+\noindent Maggetti, M., \& Gilardi, F. (2016). Problems (and solutions) in the
+measurement of policy diffusion mechanisms. \textit{Journal of Public Policy},
+\textit{36}(1), 87--107.
+
+\noindent Mallinson, D.~J. (2020). Policy innovation adoption across the diffusion
+life course. \textit{Policy Studies Journal}, \textit{49}(2), 1--25.
+
+\noindent Mallinson, D.~J. (2021). Growth and gaps: A meta-review of policy
+diffusion studies in the American states. \textit{Policy \& Politics},
+\textit{49}(3), 369--389.
+
+\noindent Rauh, C., Bock, O., Ceron, A., Froio, C., \& Zhelyazkova, A. (2023).
+ParlLawSpeech: A new comparative dataset on parliamentary speeches and legislative
+documents. \textit{Legislative Studies Quarterly}, \textit{48}(2), 411--433.
+
+\noindent Schwalbach, J., Hetzer, L., Proksch, S.-O., Rauh, C., \& Seb\H{o}k, M.
+(2025). \textit{ParlLawSpeech} [Dataset]. GESIS, Cologne.
+\url{https://doi.org/10.7802/2824}
+
+\noindent Shipan, C.~R., \& Volden, C. (2006). Bottom-up federalism: The diffusion
+of antismoking policies from U.S.\ cities to states. \textit{American Journal of
+Political Science}, \textit{50}(4), 825--843.
+
+\noindent Shipan, C.~R., \& Volden, C. (2008). The mechanisms of policy diffusion.
+\textit{American Journal of Political Science}, \textit{52}(4), 840--857.
+
+\noindent Shipan, C.~R., \& Volden, C. (2012). Policy diffusion: Seven lessons for
+scholars and practitioners. \textit{Public Administration Review}, \textit{72}(6),
+788--796.
+
+\noindent Vogel, D. (1995). \textit{Trading up: Consumer and environmental regulation
+in a global economy}. Harvard University Press.
+
+\noindent Vogeler, C.~S. (2017). Why do territorial farm animal welfare policies
+differ? Explaining regulatory variations in the EU's multi-level system.
+\textit{Journal of Comparative Policy Analysis}, \textit{19}(1), 18--34.
+
+\noindent Wallenbeck, A., H\"{o}\"{o}g, Y., \& Gunnarsson, S. (2024). Pig welfare
+policy in Europe: Adoption sequences, gold-plating, and member state divergence.
+\textit{Animal}, \textit{18}(4), 101122.
+
+\noindent World Animal Protection. (2020). \textit{Animal Protection Index 2020}.
+World Animal Protection. \url{https://api.worldanimalprotection.org/}
+
+\noindent Z\"{o}llmer, J. (2025). Race to the top of farm animal welfare policies in
+US states. \textit{Journal of Comparative Policy Analysis}.
+\url{https://doi.org/10.1080/13876988.2025.2493820}
+
+\endgroup
+
+\end{document}

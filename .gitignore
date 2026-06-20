@@ -1,2 +1,7 @@
 .venv/
-data/
+.claude/
+.env
+data/*/*.RDS
+*.md
+!README.md
+*.pdf

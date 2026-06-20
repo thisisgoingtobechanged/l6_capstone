@@ -11,4 +11,4 @@ You will need your own Claude API key, known to the Python environment e.g. usin
 ===SUPPLEMENTARY MATERIAL FOR THE PRODUCT===
 
 The product is contained in its own folder. 
-Please do not overlook the cover letter.
+Please do not overlook the cover letter to send with the product to my real-world person, found in product/output.
